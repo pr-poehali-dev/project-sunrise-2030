@@ -15,16 +15,16 @@ export function Footer() {
           <div className="md:col-span-2 md:col-start-7">
             <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Навигация</p>
             <nav className="flex flex-col gap-3">
-              <a href="#philosophy" className="text-sm text-foreground hover:text-sage transition-colors">
+              <a href="/#philosophy" className="text-sm text-foreground hover:text-sage transition-colors">
                 О нас
               </a>
-              <a href="#services" className="text-sm text-foreground hover:text-sage transition-colors">
+              <a href="/services" className="text-sm text-foreground hover:text-sage transition-colors">
                 Услуги
               </a>
-              <a href="#process" className="text-sm text-foreground hover:text-sage transition-colors">
+              <a href="/#process" className="text-sm text-foreground hover:text-sage transition-colors">
                 Как мы работаем
               </a>
-              <a href="#contact" className="text-sm text-foreground hover:text-sage transition-colors">
+              <a href="/#contact" className="text-sm text-foreground hover:text-sage transition-colors">
                 Контакты
               </a>
             </nav>

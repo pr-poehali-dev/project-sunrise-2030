@@ -1,7 +1,17 @@
 import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+  const isHome = location.pathname === "/"
+
+  const navLinks = [
+    { label: "О нас", href: isHome ? "#philosophy" : "/#philosophy" },
+    { label: "Услуги", href: "/services" },
+    { label: "Как мы работаем", href: isHome ? "#process" : "/#process" },
+    { label: "Контакты", href: isHome ? "#contact" : "/#contact" },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
@@ -14,30 +24,19 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
-            <a
-              href="#philosophy"
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500"
-            >
-              О нас
-            </a>
-            <a
-              href="#services"
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500"
-            >
-              Услуги
-            </a>
-            <a
-              href="#process"
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500"
-            >
-              Как мы работаем
-            </a>
-            <a
-              href="#contact"
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500"
-            >
-              Контакты
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`text-sm tracking-widest uppercase transition-colors duration-500 ${
+                  link.href === "/services" && location.pathname === "/services"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -63,34 +62,16 @@ export function Header() {
           className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${isMenuOpen ? "max-h-64 pb-8" : "max-h-0"}`}
         >
           <div className="flex flex-col gap-6 pt-4">
-            <a
-              href="#philosophy"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
-            >
-              О нас
-            </a>
-            <a
-              href="#services"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Услуги
-            </a>
-            <a
-              href="#process"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Как мы работаем
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Контакты
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
