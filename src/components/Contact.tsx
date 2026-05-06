@@ -29,7 +29,6 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
     console.log(formState)
   }
 
@@ -51,15 +50,14 @@ export function Contact() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Готовы начать?
+              Обсудим ваш объект?
             </h2>
             <p
               className={`text-muted-foreground leading-relaxed mb-12 max-w-md transition-all duration-1000 delay-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Каждое осмысленное пространство начинается с разговора. Расскажите о вашем видении,
-              и мы вместе найдём способ воплотить его в жизнь.
+              Расскажите об объекте — офис, торговое помещение или смешанный формат. Проведём бесплатный анализ и предложим стратегию управления.
             </p>
 
             {/* Contact Info */}
@@ -76,7 +74,7 @@ export function Contact() {
               </div>
               <div>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Локация</p>
-                <p className="text-foreground">Москва и Санкт-Петербург</p>
+                <p className="text-foreground">Москва</p>
               </div>
             </div>
           </div>
@@ -118,7 +116,7 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Сообщение
+                  Об объекте
                 </label>
                 <textarea
                   id="message"
@@ -126,7 +124,7 @@ export function Contact() {
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   rows={4}
                   className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors resize-none"
-                  placeholder="Расскажите о вашем проекте..."
+                  placeholder="Тип объекта, площадь, текущая ситуация..."
                   required
                 />
               </div>
@@ -134,7 +132,7 @@ export function Contact() {
                 type="submit"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500"
               >
-                Отправить
+                Отправить заявку
                 <svg
                   className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
                   fill="none"

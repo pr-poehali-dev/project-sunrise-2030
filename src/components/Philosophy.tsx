@@ -32,8 +32,8 @@ export function Philosophy() {
             }`}
           >
             <img
-              src="/minimalist-japanese-interior-design-with-natural-w.jpg"
-              alt="Минималистичный интерьер с натуральным деревом"
+              src="https://cdn.poehali.dev/projects/1189caab-f08a-4403-97ad-dbc686e04968/files/2dd29106-d8ff-4517-9013-d02cf758d959.jpg"
+              alt="Премиальный офисный лобби"
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Overlay accent */}
@@ -47,7 +47,7 @@ export function Philosophy() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Наша философия
+              Наш подход
             </p>
 
             <h2
@@ -55,10 +55,10 @@ export function Philosophy() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Искусство
-              <span className="italic"> осознанной</span>
+              Актив должен
+              <span className="italic"> работать</span>
               <br />
-              жизни
+              за вас
             </h2>
 
             <div
@@ -67,13 +67,13 @@ export function Philosophy() {
               }`}
             >
               <p>
-                Мы верим, что каждое пространство таит в себе потенциал для преображения. Не через добавление,
-                а через бережное вычитание — открывая то, что всегда было предначертано.
+                Мы убеждены: качественное управление — это не просто обслуживание здания. Это системная работа,
+                при которой каждый квадратный метр приносит предсказуемый доход, а арендаторы остаются годами.
               </p>
               <p>
-                Наш подход вдохновлён японской концепцией <em className="text-foreground">ма</em> — глубокой
-                красотой пустоты — и скандинавским пониманием
-                <em className="text-foreground"> хюгге</em>, этого ощущения уютного умиротворения.
+                Наш подход сочетает <em className="text-foreground">операционную точность</em> и глубокое понимание
+                рынка — мы знаем, как заполнить объект, удержать арендаторов и повысить
+                <em className="text-foreground"> капитализацию</em> актива.
               </p>
             </div>
 
@@ -84,16 +84,16 @@ export function Philosophy() {
               }`}
             >
               <div>
-                <p className="font-serif text-3xl md:text-4xl text-sage">12</p>
+                <p className="font-serif text-3xl md:text-4xl text-sage">8+</p>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Лет опыта</p>
               </div>
               <div>
-                <p className="font-serif text-3xl md:text-4xl text-sage">140+</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Проектов</p>
+                <p className="font-serif text-3xl md:text-4xl text-sage">50+</p>
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Объектов</p>
               </div>
               <div>
-                <p className="font-serif text-3xl md:text-4xl text-sage">8</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Наград</p>
+                <p className="font-serif text-3xl md:text-4xl text-sage">95%</p>
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Заполняемость</p>
               </div>
             </div>
           </div>
