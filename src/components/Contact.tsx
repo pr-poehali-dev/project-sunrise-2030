@@ -1,35 +1,37 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
+import func2url from "../../backend/func2url.json"
 
 export function Contact() {
   const [isVisible, setIsVisible] = useState(false)
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" })
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
       { threshold: 0.1 },
     )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(formState)
+    setStatus("loading")
+    try {
+      const res = await fetch(func2url["send-contact"], {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      })
+      if (!res.ok) throw new Error()
+      setStatus("success")
+      setFormState({ name: "", email: "", message: "" })
+    } catch {
+      setStatus("error")
+    }
   }
 
   return (
@@ -60,7 +62,6 @@ export function Contact() {
               Расскажите об объекте — офис, торговое помещение или смешанный формат. Проведём бесплатный анализ и предложим стратегию управления.
             </p>
 
-            {/* Contact Info */}
             <div
               className={`space-y-6 transition-all duration-1000 delay-400 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -68,8 +69,8 @@ export function Contact() {
             >
               <div>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Почта</p>
-                <a href="mailto:hello@example.com" className="text-foreground hover:text-sage transition-colors">
-                  hello@example.com
+                <a href="mailto:a@aszotin.ru" className="text-foreground hover:text-sage transition-colors">
+                  a@aszotin.ru
                 </a>
               </div>
               <div>
@@ -85,64 +86,93 @@ export function Contact() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div>
-                <label htmlFor="name" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Имя
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={formState.name}
-                  onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors"
-                  placeholder="Ваше имя"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Почта
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formState.email}
-                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors"
-                  placeholder="ваш@email.com"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Об объекте
-                </label>
-                <textarea
-                  id="message"
-                  value={formState.message}
-                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                  rows={4}
-                  className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors resize-none"
-                  placeholder="Тип объекта, площадь, текущая ситуация..."
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500"
-              >
-                Отправить заявку
-                <svg
-                  className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+            {status === "success" ? (
+              <div className="flex flex-col justify-center h-full py-12">
+                <p className="text-xs tracking-[0.3em] uppercase text-sage mb-4">Заявка отправлена</p>
+                <p className="font-serif text-3xl font-light text-foreground mb-4">Спасибо, {formState.name || ""}!</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Мы получили вашу заявку и свяжемся в ближайшее время.
+                </p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="mt-8 text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors self-start"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
-            </form>
+                  Отправить ещё
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div>
+                  <label htmlFor="name" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
+                    Имя
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors"
+                    placeholder="Ваше имя"
+                    required
+                    disabled={status === "loading"}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
+                    Почта
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors"
+                    placeholder="ваш@email.com"
+                    required
+                    disabled={status === "loading"}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
+                    Об объекте
+                  </label>
+                  <textarea
+                    id="message"
+                    value={formState.message}
+                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                    rows={4}
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors resize-none"
+                    placeholder="Тип объекта, площадь, текущая ситуация..."
+                    required
+                    disabled={status === "loading"}
+                  />
+                </div>
+
+                {status === "error" && (
+                  <p className="text-terracotta text-sm">
+                    Не удалось отправить заявку. Попробуйте ещё раз или напишите напрямую на почту.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500 disabled:opacity-60"
+                >
+                  {status === "loading" ? "Отправляем..." : "Отправить заявку"}
+                  {status !== "loading" && (
+                    <svg
+                      className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  )}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
