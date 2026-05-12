@@ -5,7 +5,7 @@ export function Footer() {
         <div className="grid md:grid-cols-12 gap-12">
           {/* Logo & Tagline */}
           <div className="md:col-span-4">
-            <p className="font-serif text-2xl tracking-wide text-foreground mb-4">ZPM</p>
+            <p className="font-serif text-2xl tracking-wide text-foreground mb-4">recom</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Профессиональное управление офисами и стрит ритейлом.
             </p>
@@ -60,7 +60,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} ZPM. Все права защищены.
+            &copy; {new Date().getFullYear()} recom. Все права защищены.
           </p>
           <p className="text-xs text-muted-foreground">Управляем с вниманием к деталям</p>
         </div>
