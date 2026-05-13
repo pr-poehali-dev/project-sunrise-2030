@@ -6,7 +6,7 @@ export function Footer() {
           {/* Logo & Tagline */}
           <div className="md:col-span-4">
             <div className="flex flex-col leading-none mb-4">
-              <span className="text-2xl tracking-wide text-foreground" style={{fontFamily: "'Playfair Display', serif", fontWeight: 700}}>re<span className="text-terracotta">-</span>com</span>
+              <span className="text-3xl tracking-wide text-foreground" style={{fontFamily: "'Playfair Display', serif", fontWeight: 700}}>re<span className="text-terracotta">-</span>com</span>
               <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">Reliable Commercial Property</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
