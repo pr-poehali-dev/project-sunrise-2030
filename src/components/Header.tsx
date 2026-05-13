@@ -19,7 +19,7 @@ export function Header() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <a href="/" className="font-serif text-2xl tracking-wide text-foreground">
-            recom
+            реком
           </a>
 
           {/* Desktop Navigation */}
