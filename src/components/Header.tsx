@@ -20,7 +20,7 @@ export function Header() {
           {/* Logo */}
           <a href="/" className="flex flex-col leading-none">
             <span className="text-4xl tracking-wide text-foreground" style={{fontFamily: "'Playfair Display', serif", fontWeight: 700}}>re<span className="text-terracotta">-</span>com</span>
-            <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">Reliable Commercial Property</span>
+            <span className="text-[9px] tracking-[0.2em] uppercase text-foreground mt-0.5">Reliable Commercial Property</span>
           </a>
 
           {/* Desktop Navigation */}
