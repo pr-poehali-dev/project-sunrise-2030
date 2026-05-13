@@ -69,8 +69,8 @@ export function Contact() {
             >
               <div>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Почта</p>
-                <a href="mailto:a@aszotin.ru" className="text-foreground hover:text-sage transition-colors">
-                  a@aszotin.ru
+                <a href="mailto:info@re-com.site" className="text-foreground hover:text-sage transition-colors">
+                  info@re-com.site
                 </a>
               </div>
               <div>
