@@ -18,8 +18,9 @@ export function Header() {
       <nav className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <a href="/" className="font-serif text-2xl tracking-wide text-foreground">
-            ре<span className="text-terracotta">-</span>ком
+          <a href="/" className="flex flex-col leading-none">
+            <span className="font-serif text-2xl tracking-wide text-foreground">Re<span className="text-terracotta">-</span>com</span>
+            <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">Reliable Commercial Property</span>
           </a>
 
           {/* Desktop Navigation */}

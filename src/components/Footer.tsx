@@ -5,7 +5,10 @@ export function Footer() {
         <div className="grid md:grid-cols-12 gap-12">
           {/* Logo & Tagline */}
           <div className="md:col-span-4">
-            <p className="font-serif text-2xl tracking-wide text-foreground mb-4">ре<span className="text-terracotta">-</span>ком</p>
+            <div className="flex flex-col leading-none mb-4">
+              <span className="font-serif text-2xl tracking-wide text-foreground">Re<span className="text-terracotta">-</span>com</span>
+              <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">Reliable Commercial Property</span>
+            </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Профессиональное управление офисами и стрит ритейлом.
             </p>
