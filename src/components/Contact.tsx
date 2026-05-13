@@ -4,7 +4,7 @@ import func2url from "../../backend/func2url.json"
 
 export function Contact() {
   const [isVisible, setIsVisible] = useState(false)
-  const [formState, setFormState] = useState({ name: "", email: "", message: "" })
+  const [formState, setFormState] = useState({ name: "", email: "", phone: "", message: "" })
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -28,7 +28,7 @@ export function Contact() {
       })
       if (!res.ok) throw new Error()
       setStatus("success")
-      setFormState({ name: "", email: "", message: "" })
+      setFormState({ name: "", email: "", phone: "", message: "" })
     } catch {
       setStatus("error")
     }
@@ -129,6 +129,20 @@ export function Contact() {
                     className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors"
                     placeholder="ваш@email.com"
                     required
+                    disabled={status === "loading"}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
+                    Телефон
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={formState.phone}
+                    onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-sage focus:outline-none transition-colors"
+                    placeholder="+7 (___) ___-__-__"
                     disabled={status === "loading"}
                   />
                 </div>

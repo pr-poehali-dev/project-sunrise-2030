@@ -30,19 +30,6 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Social */}
-          <div className="md:col-span-2">
-            <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Соцсети</p>
-            <nav className="flex flex-col gap-3">
-              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
-                Telegram
-              </a>
-              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
-                ВКонтакте
-              </a>
-            </nav>
-          </div>
-
           {/* Legal */}
           <div className="md:col-span-2">
             <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Документы</p>

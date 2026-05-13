@@ -19,6 +19,7 @@ def handler(event: dict, context) -> dict:
     body = json.loads(event.get("body") or "{}")
     name = body.get("name", "").strip()
     email = body.get("email", "").strip()
+    phone = body.get("phone", "").strip()
     message = body.get("message", "").strip()
 
     if not name or not email or not message:
@@ -53,6 +54,10 @@ def handler(event: dict, context) -> dict:
         <tr style="border-top: 1px solid #e0dbd0;">
           <td style="padding: 12px 0; color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">Почта</td>
           <td style="padding: 12px 0;"><a href="mailto:{email}" style="color: #6b8f71;">{email}</a></td>
+        </tr>
+        <tr style="border-top: 1px solid #e0dbd0;">
+          <td style="padding: 12px 0; color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">Телефон</td>
+          <td style="padding: 12px 0;">{phone if phone else "—"}</td>
         </tr>
         <tr style="border-top: 1px solid #e0dbd0;">
           <td style="padding: 12px 0; color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Об объекте</td>
