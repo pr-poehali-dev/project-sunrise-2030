@@ -19,7 +19,7 @@ export function Header() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex flex-col leading-none">
-            <span className="font-serif text-2xl tracking-wide text-foreground">Re<span className="text-terracotta">-</span>com</span>
+            <span className="font-serif text-2xl tracking-wide text-foreground">re<span className="text-terracotta">-</span>com</span>
             <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">Reliable Commercial Property</span>
           </a>
 

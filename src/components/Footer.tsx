@@ -6,7 +6,7 @@ export function Footer() {
           {/* Logo & Tagline */}
           <div className="md:col-span-4">
             <div className="flex flex-col leading-none mb-4">
-              <span className="font-serif text-2xl tracking-wide text-foreground">Re<span className="text-terracotta">-</span>com</span>
+              <span className="font-serif text-2xl tracking-wide text-foreground">re<span className="text-terracotta">-</span>com</span>
               <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">Reliable Commercial Property</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -50,7 +50,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} реком. Все права защищены.
+            &copy; {new Date().getFullYear()} re-com. Все права защищены.
           </p>
           <p className="text-xs text-muted-foreground">Управляем с вниманием к деталям</p>
         </div>
