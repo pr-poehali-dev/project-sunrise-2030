@@ -5,7 +5,7 @@ export function Footer() {
         <div className="grid md:grid-cols-12 gap-12">
           {/* Logo & Tagline */}
           <div className="md:col-span-4">
-            <p className="font-serif text-2xl tracking-wide text-foreground mb-4">реком</p>
+            <p className="font-serif text-2xl tracking-wide text-foreground mb-4">ре<span className="text-terracotta">-</span>ком</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Профессиональное управление офисами и стрит ритейлом.
             </p>
