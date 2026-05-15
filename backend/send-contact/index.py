@@ -1,12 +1,38 @@
 import json
 import os
 import smtplib
+import urllib.request
+import urllib.parse
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
+def send_whatsapp(name: str, phone: str, email: str, message: str):
+    instance_id = os.environ.get("GREEN_API_INSTANCE")
+    api_token = os.environ.get("GREEN_API_TOKEN")
+    if not instance_id or not api_token:
+        return
+
+    wa_message = (
+        f"📋 Новая заявка с сайта ZPM\n\n"
+        f"👤 Имя: {name}\n"
+        f"📧 Email: {email}\n"
+        f"📞 Телефон: {phone if phone else '—'}\n\n"
+        f"💬 Об объекте:\n{message}"
+    )
+
+    url = f"https://api.green-api.com/waInstance{instance_id}/sendMessage/{api_token}"
+    payload = json.dumps({
+        "chatId": "79588324242@c.us",
+        "message": wa_message
+    }).encode("utf-8")
+
+    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"}, method="POST")
+    urllib.request.urlopen(req, timeout=10)
+
+
 def handler(event: dict, context) -> dict:
-    """Отправка заявки с контактной формы на почту владельца сайта."""
+    """Отправка заявки с контактной формы на почту и в WhatsApp владельца сайта."""
     headers = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -72,6 +98,8 @@ def handler(event: dict, context) -> dict:
     with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
         server.login(smtp_user, smtp_password)
         server.sendmail(smtp_user, recipient, msg.as_string())
+
+    send_whatsapp(name, phone, email, message)
 
     return {
         "statusCode": 200,
