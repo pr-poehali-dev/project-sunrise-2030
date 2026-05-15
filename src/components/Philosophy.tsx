@@ -88,11 +88,11 @@ export function Philosophy() {
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Лет опыта</p>
               </div>
               <div>
-                <p className="font-serif text-3xl md:text-4xl text-sage">50+</p>
+                <p className="font-serif text-3xl md:text-4xl text-sage">25</p>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Объектов</p>
               </div>
               <div>
-                <p className="font-serif text-3xl md:text-4xl text-sage">95%</p>
+                <p className="font-serif text-3xl md:text-4xl text-sage">98%</p>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">Заполняемость</p>
               </div>
             </div>
