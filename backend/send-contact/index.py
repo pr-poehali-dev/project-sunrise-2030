@@ -14,7 +14,7 @@ def send_whatsapp(name: str, phone: str, email: str, message: str):
         return
 
     wa_message = (
-        f"📋 Новая заявка с сайта ZPM\n\n"
+        f"📋 Новая заявка с сайта re-com.site\n\n"
         f"👤 Имя: {name}\n"
         f"📧 Email: {email}\n"
         f"📞 Телефон: {phone if phone else '—'}\n\n"
@@ -62,15 +62,15 @@ def handler(event: dict, context) -> dict:
     recipient = "info@re-com.site"
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"Новая заявка с сайта ZPM от {name}"
-    msg["From"] = f"ZPM <{smtp_user}>"
+    msg["Subject"] = f"Новая заявка с сайта re-com.site от {name}"
+    msg["From"] = f"re-com.site <{smtp_user}>"
     msg["To"] = recipient
     msg["Reply-To"] = email
 
     html_body = f"""
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
       <h2 style="font-weight: normal; border-bottom: 1px solid #e0dbd0; padding-bottom: 16px;">
-        Новая заявка с сайта ZPM
+        Новая заявка с сайта re-com.site
       </h2>
       <table style="width: 100%; border-collapse: collapse; margin-top: 24px;">
         <tr>
