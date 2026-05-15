@@ -68,6 +68,12 @@ export function Contact() {
               }`}
             >
               <div>
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Телефон</p>
+                <a href="tel:+79588324242" className="text-foreground hover:text-sage transition-colors">
+                  +7 (958) 832-42-42
+                </a>
+              </div>
+              <div>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Почта</p>
                 <a href="mailto:info@re-com.site" className="text-foreground hover:text-sage transition-colors">
                   info@re-com.site
