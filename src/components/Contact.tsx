@@ -74,6 +74,17 @@ export function Contact() {
                 </a>
               </div>
               <div>
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">WhatsApp</p>
+                <a
+                  href="https://wa.me/79588324242"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground hover:text-sage transition-colors"
+                >
+                  Написать в WhatsApp
+                </a>
+              </div>
+              <div>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Почта</p>
                 <a href="mailto:info@re-com.site" className="text-foreground hover:text-sage transition-colors">
                   info@re-com.site
