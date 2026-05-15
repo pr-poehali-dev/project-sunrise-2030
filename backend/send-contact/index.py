@@ -55,15 +55,15 @@ def handler(event: dict, context) -> dict:
             "body": json.dumps({"error": "Заполните все поля"}),
         }
 
-    smtp_host = os.environ.get("SMTP_HOST", "smtp.yandex.ru")
+    smtp_host = os.environ.get("SMTP_HOST", "mail.nic.ru")
     smtp_port = int(os.environ.get("SMTP_PORT", "465"))
-    smtp_user = os.environ.get("SMTP_USER", "a@aszotin.ru")
+    smtp_user = os.environ.get("SMTP_USER", "info@re-com.site")
     smtp_password = os.environ["SMTP_PASSWORD"]
-    recipient = "a@aszotin.ru"
+    recipient = "info@re-com.site"
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"Новая заявка с сайта ZPM от {name}"
-    msg["From"] = smtp_user
+    msg["From"] = f"ZPM <{smtp_user}>"
     msg["To"] = recipient
     msg["Reply-To"] = email
 
