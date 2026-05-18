@@ -1,6 +1,7 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import func2url from "../../backend/func2url.json"
+import { QRCodeSVG } from "qrcode.react"
 
 export function Contact() {
   const [isVisible, setIsVisible] = useState(false)
@@ -93,6 +94,19 @@ export function Contact() {
               <div>
                 <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">Локация</p>
                 <p className="text-foreground">Москва</p>
+              </div>
+              <div className="pt-4">
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Написать в WhatsApp</p>
+                <div className="inline-block p-3 bg-white rounded-lg">
+                  <QRCodeSVG
+                    value="https://wa.me/79588324242"
+                    size={120}
+                    bgColor="#ffffff"
+                    fgColor="#1a1a1a"
+                    level="M"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">Наведите камеру телефона</p>
               </div>
             </div>
           </div>
