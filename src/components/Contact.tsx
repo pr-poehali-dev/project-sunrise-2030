@@ -1,11 +1,13 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import func2url from "../../backend/func2url.json"
 import { QRCodeSVG } from "qrcode.react"
 
 export function Contact() {
   const [isVisible, setIsVisible] = useState(false)
   const [formState, setFormState] = useState({ name: "", email: "", phone: "", message: "" })
+  const [consent, setConsent] = useState(false)
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -20,6 +22,7 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!consent) return
     setStatus("loading")
     try {
       const res = await fetch(func2url["send-contact"], {
@@ -30,6 +33,7 @@ export function Contact() {
       if (!res.ok) throw new Error()
       setStatus("success")
       setFormState({ name: "", email: "", phone: "", message: "" })
+      setConsent(false)
     } catch {
       setStatus("error")
     }
@@ -199,9 +203,26 @@ export function Contact() {
                   </p>
                 )}
 
+                <label className="flex items-start gap-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    disabled={status === "loading"}
+                    required
+                    className="mt-1 h-4 w-4 shrink-0 accent-sage cursor-pointer"
+                  />
+                  <span className="text-sm text-muted-foreground leading-relaxed">
+                    Я согласен(а) на{" "}
+                    <Link to="/privacy-policy" target="_blank" className="underline hover:text-foreground transition-colors">
+                      обработку персональных данных
+                    </Link>
+                  </span>
+                </label>
+
                 <button
                   type="submit"
-                  disabled={status === "loading"}
+                  disabled={status === "loading" || !consent}
                   className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500 disabled:opacity-60"
                 >
                   {status === "loading" ? "Отправляем..." : "Отправить заявку"}
