@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export function Footer() {
   return (
     <footer className="py-16 px-6 lg:px-12 border-t border-border">
@@ -37,9 +39,9 @@ export function Footer() {
           <div className="md:col-span-2">
             <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Документы</p>
             <nav className="flex flex-col gap-3">
-              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
-                Политика
-              </a>
+              <Link to="/privacy-policy" className="text-sm text-foreground hover:text-sage transition-colors">
+                Согласие на обработку ПДн
+              </Link>
               <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
                 Условия
               </a>
