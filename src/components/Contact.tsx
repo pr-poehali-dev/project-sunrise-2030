@@ -28,7 +28,7 @@ export function Contact() {
       const res = await fetch(func2url["send-contact"], {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({ ...formState, consent }),
       })
       if (!res.ok) throw new Error()
       setStatus("success")

@@ -3,11 +3,17 @@ import os
 import smtplib
 import urllib.request
 import urllib.parse
+from datetime import datetime, timezone, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def send_whatsapp(name: str, phone: str, email: str, message: str):
+def consent_stamp() -> str:
+    now = datetime.now(timezone(timedelta(hours=3)))
+    return now.strftime("%d.%m.%Y %H:%M") + " (МСК)"
+
+
+def send_whatsapp(name: str, phone: str, email: str, message: str, consent_text: str):
     instance_id = os.environ.get("GREEN_API_INSTANCE")
     api_token = os.environ.get("GREEN_API_TOKEN")
     if not instance_id or not api_token:
@@ -18,7 +24,8 @@ def send_whatsapp(name: str, phone: str, email: str, message: str):
         f"👤 Имя: {name}\n"
         f"📧 Email: {email}\n"
         f"📞 Телефон: {phone if phone else '—'}\n\n"
-        f"💬 Об объекте:\n{message}"
+        f"💬 Об объекте:\n{message}\n\n"
+        f"✅ {consent_text}"
     )
 
     url = f"https://api.green-api.com/waInstance{instance_id}/sendMessage/{api_token}"
@@ -48,7 +55,9 @@ def handler(event: dict, context) -> dict:
     phone = body.get("phone", "").strip()
     message = body.get("message", "").strip()
 
-    if not name or not email or not message:
+    consent = body.get("consent") is True
+
+    if not name or not email or not message or not consent:
         return {
             "statusCode": 400,
             "headers": headers,
@@ -60,6 +69,8 @@ def handler(event: dict, context) -> dict:
     smtp_user = os.environ.get("SMTP_USER", "info@re-com.site")
     smtp_password = os.environ["SMTP_PASSWORD"]
     recipient = "info@re-com.site"
+
+    consent_text = f"Согласие на обработку ПДн получено: {consent_stamp()}"
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"Новая заявка с сайта re-com.site от {name}"
@@ -89,6 +100,10 @@ def handler(event: dict, context) -> dict:
           <td style="padding: 12px 0; color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Об объекте</td>
           <td style="padding: 12px 0; white-space: pre-wrap;">{message}</td>
         </tr>
+        <tr style="border-top: 1px solid #e0dbd0;">
+          <td style="padding: 12px 0; color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Согласие</td>
+          <td style="padding: 12px 0;">{consent_text}</td>
+        </tr>
       </table>
     </div>
     """
@@ -106,7 +121,7 @@ def handler(event: dict, context) -> dict:
 
     wa_ok = False
     try:
-        send_whatsapp(name, phone, email, message)
+        send_whatsapp(name, phone, email, message, consent_text)
         wa_ok = True
     except Exception as e:
         print(f"[WHATSAPP ERROR] {type(e).__name__}: {e}")
