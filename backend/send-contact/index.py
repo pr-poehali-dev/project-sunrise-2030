@@ -95,11 +95,28 @@ def handler(event: dict, context) -> dict:
 
     msg.attach(MIMEText(html_body, "html"))
 
-    with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
-        server.login(smtp_user, smtp_password)
-        server.sendmail(smtp_user, recipient, msg.as_string())
+    email_ok = False
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=10) as server:
+            server.login(smtp_user, smtp_password)
+            server.sendmail(smtp_user, recipient, msg.as_string())
+        email_ok = True
+    except Exception as e:
+        print(f"[EMAIL ERROR] {type(e).__name__}: {e}")
 
-    send_whatsapp(name, phone, email, message)
+    wa_ok = False
+    try:
+        send_whatsapp(name, phone, email, message)
+        wa_ok = True
+    except Exception as e:
+        print(f"[WHATSAPP ERROR] {type(e).__name__}: {e}")
+
+    if not email_ok and not wa_ok:
+        return {
+            "statusCode": 502,
+            "headers": headers,
+            "body": json.dumps({"error": "Не удалось отправить заявку"}),
+        }
 
     return {
         "statusCode": 200,
